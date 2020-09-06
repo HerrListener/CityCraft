@@ -1,6 +1,7 @@
 package de.citycraft.api;
 
 import de.citycraft.api.plot.PlotManager;
+import de.citycraft.plot.PlotConfiguration;
 
 import java.util.List;
 
@@ -13,10 +14,17 @@ public class CityCraftAPI {
     }
 
     private PlotManager plotManager;
+    private PlotConfiguration configuration;
 
     public CityCraftAPI() {
         api = this;
-        this.plotManager = new PlotManager();
+        this.configuration = new PlotConfiguration();
+
+        this.plotManager = (this.configuration.get() == null) ? new PlotManager() : this.configuration.get();
+    }
+
+    public PlotConfiguration getConfiguration() {
+        return configuration;
     }
 
     public PlotManager getPlotManager() {
