@@ -80,6 +80,10 @@ public class CityBuildCommand extends AbstractCommand {
                     player.sendMessage("§7§oDas leeren des Grundstückes hat §e§o"+timeMS+"ms §7§ogedauert.");
                 }
 
+            } else if(args[0].equalsIgnoreCase("save")) {
+                CityCraftAPI cityCraftAPI = CityCraftAPI.get();
+                cityCraftAPI.getConfiguration().save(cityCraftAPI.getPlotManager());
+                player.sendMessage("§a§oWurde gespeichert.");
             }
 
         }
