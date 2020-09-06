@@ -74,6 +74,7 @@ public class CityBuildCommand extends AbstractCommand {
                             player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dieser Spieler wurde bereits hinzugefügt");
                             return true;
                         }
+                        plot.getTrustedPlayers().add(target.getUniqueId().toString());
                         player.sendMessage(MESSAGES.PREFIX.getText()+"§aDer Spieler wurde erfolgreich hinzugefügt.");
                     } else {
                         player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dir gehört das Grundstück nicht.");
@@ -102,6 +103,7 @@ public class CityBuildCommand extends AbstractCommand {
                             return true;
                         }
                         player.sendMessage(MESSAGES.PREFIX.getText()+"§aDer Spieler wurde erfolgreich entfernt.");
+                        plot.getTrustedPlayers().remove(target.getUniqueId().toString());
                     } else {
                         player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dir gehört das Grundstück nicht.");
                     }
