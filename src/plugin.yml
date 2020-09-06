@@ -2,3 +2,5 @@ name: CityCraft
 version: 1.0.0
 main: de.citycraft.CityCraft
 author: HerrListener
+
+api-version: 1.13
