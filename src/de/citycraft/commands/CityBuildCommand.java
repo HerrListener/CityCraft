@@ -1,5 +1,6 @@
 package de.citycraft.commands;
 
+import de.citycraft.MESSAGES;
 import de.citycraft.api.CityCraftAPI;
 import de.citycraft.generation.PlotWorldGenerator;
 import de.citycraft.plot.Plot;
@@ -22,6 +23,10 @@ public class CityBuildCommand extends AbstractCommand {
         if(args.length == 2) {
 
             if(args[0].equalsIgnoreCase("create")) {
+                if(!player.hasPermission("ciytcraft.create.world")) {
+                    player.sendMessage(MESSAGES.NOPERM.noPermission("citybuild.create.world"));
+                    return true;
+                }
                 String worldName = args[1];
                 CityCraftAPI.get().getPlotManager().getPlotWorlds().add(worldName);
                 PlotWorldGenerator plotWorldGenerator = new PlotWorldGenerator(player, 20);
@@ -35,7 +40,7 @@ public class CityBuildCommand extends AbstractCommand {
                     Plot plot = CityCraftAPI.get().getPlotManager().getPlotById(id);
                     player.teleport(plot.getPlotMid());
                 } catch (Exception e) {
-
+                    player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dies ist keine gültige Eingabe");
                 }
 
             }
@@ -47,15 +52,15 @@ public class CityBuildCommand extends AbstractCommand {
                 Plot plot = CityCraftAPI.get().getPlotManager().getPlotByLocation(player.getLocation());
 
                 if(plot == null) {
-                    player.sendMessage("§4§oDu befindest dich auf keinem Plot");
+                    player.sendMessage(MESSAGES.PREFIX.getText()+"§4Du befindest dich auf keinem Plot");
                     return true;
                 }
 
                 if(!plot.isClaimed()) {
-                    player.sendMessage("§a§oDu hast dieses Grundstück geclaimt");
+                    player.sendMessage(MESSAGES.PREFIX.getText()+"§aDieses Grundstück gehört nun dir");
                     plot.setOwnerUUID(player.getUniqueId().toString());
                 } else {
-                    player.sendMessage("§4§oDieses Plot gehört schon jemandem");
+                    player.sendMessage(MESSAGES.PREFIX.getText()+"§4Das Plot ist bereits in besitz");
                 }
 
             } else if(args[0].equalsIgnoreCase("clear")) {
@@ -63,27 +68,31 @@ public class CityBuildCommand extends AbstractCommand {
                 Plot plot = CityCraftAPI.get().getPlotManager().getPlotByLocation(player.getLocation());
 
                 if(plot == null) {
-                    player.sendMessage("§4§oDu befindest dich auf keinem Plot");
+                    player.sendMessage(MESSAGES.PREFIX.getText()+"§4Du befindest dich auf keinem Plot");
                     return true;
                 }
 
                 if(!plot.isOwner(player.getUniqueId().toString())) {
                     if(player.hasPermission("citycraft.plots.clear")) {
                         long timeMS = plot.clearPlot();
-                        player.sendMessage("§7§oDas leeren des Grundstückes hat §e§o"+timeMS+"ms §7§ogedauert.");
+                        player.sendMessage(MESSAGES.PREFIX.getText()+"§7Das leeren des Grundstückes hat §e"+timeMS+"ms §7benötigt");
                     } else {
-                        player.sendMessage("§4§oDu bist nicht der Inhaber dieses Grundstückes");
+                        player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dieses Grundstück gehört nicht dir");
                         return true;
                     }
                 } else {
                     long timeMS = plot.clearPlot();
-                    player.sendMessage("§7§oDas leeren des Grundstückes hat §e§o"+timeMS+"ms §7§ogedauert.");
+                    player.sendMessage(MESSAGES.PREFIX.getText()+"§7Das leeren des Grundstückes hat §e"+timeMS+"ms §7benötigt");
                 }
 
             } else if(args[0].equalsIgnoreCase("save")) {
-                CityCraftAPI cityCraftAPI = CityCraftAPI.get();
-                cityCraftAPI.getConfiguration().save(cityCraftAPI.getPlotManager());
-                player.sendMessage("§a§oWurde gespeichert.");
+                if(player.hasPermission("citycraft.save")) {
+                    CityCraftAPI cityCraftAPI = CityCraftAPI.get();
+                    cityCraftAPI.getConfiguration().save(cityCraftAPI.getPlotManager());
+                    player.sendMessage("§a§oWurde gespeichert.");
+                } else {
+                    player.sendMessage(MESSAGES.NOPERM.noPermission("citybuild.save"));
+                }
             }
 
         }

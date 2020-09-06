@@ -1,5 +1,6 @@
 package de.citycraft.listener;
 
+import de.citycraft.MESSAGES;
 import de.citycraft.api.CityCraftAPI;
 import de.citycraft.plot.Plot;
 import org.bukkit.entity.Player;
@@ -25,13 +26,13 @@ public class BuildListener implements Listener {
             if(!plot.isOwner(player.getUniqueId().toString())) {
                 if(!player.hasPermission("citycraft.interact.plots")) {
                     event.setCancelled(true);
-                    player.sendMessage("§4Missing permission §ccitycraft.interact.plots");
+                    player.sendMessage(MESSAGES.NOPERM.noPermission("citybuild.interact.plots"));
                 }
             }
         } else {
             if(!player.hasPermission("citycraft.interact.roads")) {
                 event.setCancelled(true);
-                player.sendMessage("§4Missing permission §ccitycraft.interact.roads");
+                player.sendMessage(MESSAGES.NOPERM.noPermission("citybuild.interact.roads"));
             }
         }
 
@@ -63,13 +64,13 @@ public class BuildListener implements Listener {
             if(!plot.isOwner(player.getUniqueId().toString())) {
                 if(!player.hasPermission("citycraft.interact.plots")) {
                     event.setCancelled(true);
-                    player.sendMessage("§4Missing permission §ccitycraft.interact.plots");
+                    player.sendMessage(MESSAGES.NOPERM.noPermission("citybuild.interact.plots"));
                 }
             }
         } else {
             if(!player.hasPermission("citycraft.interact.roads")) {
                 event.setCancelled(true);
-                player.sendMessage("§4Missing permission §ccitycraft.interact.roads");
+                player.sendMessage(MESSAGES.NOPERM.noPermission("citybuild.interact.roads"));
             }
         }
 
