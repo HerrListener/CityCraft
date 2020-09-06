@@ -41,7 +41,7 @@ public class PlotChunkGenerator extends ChunkGenerator {
             for(int x = 0; x < 16; x++) {
                 for(int z = 0; z < 16; z++) {
                     if(y == 15) {
-                        chunkData.setBlock(x,y,z,Material.GRASS);
+                        chunkData.setBlock(x,y,z,Material.GRASS_BLOCK);
                     } else {
                         chunkData.setBlock(x,y,z, Material.DIRT);
                     }
@@ -71,7 +71,7 @@ public class PlotChunkGenerator extends ChunkGenerator {
                 long relZ = (realZ + z) % diffZ;
 
                 if(relX < plotSizeX && relZ < plotSizeZ) {
-                    chunkData.setBlock(x, 15, z, Material.GRASS);
+                    chunkData.setBlock(x, 15, z, Material.GRASS_BLOCK);
                 } else {
                     chunkData.setBlock(x, 15, z, Material.OAK_WOOD);
                 }

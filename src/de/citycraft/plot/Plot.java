@@ -79,7 +79,7 @@ public class Plot {
                     if(y < 15) {
                         Bukkit.getWorld(this.world).getBlockAt(x,y,z).setType(Material.DIRT);
                     } else if(y == 15) {
-                        Bukkit.getWorld(this.world).getBlockAt(x,y,z).setType(Material.GRASS);
+                        Bukkit.getWorld(this.world).getBlockAt(x,y,z).setType(Material.GRASS_BLOCK);
                     } else {
                         Bukkit.getWorld(this.world).getBlockAt(x,y,z).setType(Material.AIR);
                     }
