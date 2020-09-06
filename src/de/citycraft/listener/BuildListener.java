@@ -24,7 +24,7 @@ public class BuildListener implements Listener {
 
         if(plot != null) {
             if(!plot.isOwner(player.getUniqueId().toString())) {
-                if(!player.hasPermission("citycraft.interact.plots")) {
+                if(!player.hasPermission("citycraft.interact.plots") && !plot.isTrusted(player.getUniqueId().toString())) {
                     event.setCancelled(true);
                     player.sendMessage(MESSAGES.NOPERM.noPermission("citybuild.interact.plots"));
                 }
@@ -62,7 +62,7 @@ public class BuildListener implements Listener {
 
         if(plot != null) {
             if(!plot.isOwner(player.getUniqueId().toString())) {
-                if(!player.hasPermission("citycraft.interact.plots")) {
+                if(!player.hasPermission("citycraft.interact.plots") && !plot.isTrusted(player.getUniqueId().toString())) {
                     event.setCancelled(true);
                     player.sendMessage(MESSAGES.NOPERM.noPermission("citybuild.interact.plots"));
                 }

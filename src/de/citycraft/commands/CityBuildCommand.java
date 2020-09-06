@@ -4,6 +4,8 @@ import de.citycraft.MESSAGES;
 import de.citycraft.api.CityCraftAPI;
 import de.citycraft.generation.PlotWorldGenerator;
 import de.citycraft.plot.Plot;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -41,6 +43,68 @@ public class CityBuildCommand extends AbstractCommand {
                     player.teleport(plot.getPlotMid());
                 } catch (Exception e) {
                     player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dies ist keine gültige Eingabe");
+                }
+
+            } else if(args[0].equalsIgnoreCase("add")) {
+                Plot plot = CityCraftAPI.get().getPlotManager().getPlotByLocation(player.getLocation());
+                if(plot == null) {
+                    player.sendMessage(MESSAGES.PREFIX.getText()+"§4Du befindest dich auf keinem Plot");
+                    return true;
+                }
+
+                if(plot.isOwner(player.getUniqueId().toString())) {
+                    Player target = Bukkit.getPlayer(args[1]);
+                    if(target==null) {
+                        player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dieser Spieler ist nicht online");
+                        return true;
+                    }
+                    if(plot.isTrusted(target.getUniqueId().toString())) {
+                        player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dieser Spieler wurde bereits hinzugefügt");
+                        return true;
+                    }
+                    player.sendMessage(MESSAGES.PREFIX.getText()+"§aDer Spieler wurde erfolgreich hinzugefügt.");
+                } else {
+                    if(player.hasPermission("citybuild.admin")) {
+                        Player target = Bukkit.getPlayer(args[1]);
+                        if(target==null) {
+                            player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dieser Spieler ist nicht online");
+                            return true;
+                        }
+                        if(plot.isTrusted(target.getUniqueId().toString())) {
+                            player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dieser Spieler wurde bereits hinzugefügt");
+                            return true;
+                        }
+                        player.sendMessage(MESSAGES.PREFIX.getText()+"§aDer Spieler wurde erfolgreich hinzugefügt.");
+                    } else {
+                        player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dir gehört das Grundstück nicht.");
+                    }
+                }
+
+            } else if(args[0].equalsIgnoreCase("remove")) {
+                Plot plot = CityCraftAPI.get().getPlotManager().getPlotByLocation(player.getLocation());
+                if(plot == null) {
+                    player.sendMessage(MESSAGES.PREFIX.getText()+"§4Du befindest dich auf keinem Plot");
+                    return true;
+                }
+
+                if(plot.isOwner(player.getUniqueId().toString())) {
+                    OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
+                    if(!plot.isTrusted(target.getUniqueId().toString())) {
+                        player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dieser Spieler wurde nicht hinzugefügt");
+                        return true;
+                    }
+                    player.sendMessage(MESSAGES.PREFIX.getText()+"§aDer Spieler wurde erfolgreich entfernt.");
+                } else {
+                    if(player.hasPermission("citybuild.admin")) {
+                        OfflinePlayer target = Bukkit.getOfflinePlayer(args[1]);
+                        if(!plot.isTrusted(target.getUniqueId().toString())) {
+                            player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dieser Spieler wurde nicht hinzugefügt");
+                            return true;
+                        }
+                        player.sendMessage(MESSAGES.PREFIX.getText()+"§aDer Spieler wurde erfolgreich entfernt.");
+                    } else {
+                        player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dir gehört das Grundstück nicht.");
+                    }
                 }
 
             }

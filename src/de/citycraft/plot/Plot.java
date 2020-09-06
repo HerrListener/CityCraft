@@ -1,15 +1,19 @@
 package de.citycraft.plot;
 
+import com.google.common.collect.Lists;
 import de.citycraft.api.CityCraftAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class Plot {
 
     private String ownerUUID, world;
     private int maxX, minX, maxZ, minZ, id;
+    private List<String> trustedPlayers;
 
 
     public Plot(String world, int maxX, int minX, int maxZ, int minZ) {
@@ -20,6 +24,7 @@ public class Plot {
         this.maxZ = maxZ;
         this.minX = minX;
         this.minZ = minZ;
+        this.trustedPlayers = Lists.newArrayList();
     }
 
     public boolean isInside(Location location) {
@@ -33,11 +38,19 @@ public class Plot {
         return false;
     }
 
+    public boolean isTrusted(String uuid) {
+        return this.trustedPlayers.contains(uuid);
+    }
+
     public boolean joinPlot(Location from, Location to) {
         if(!isInside(from) && isInside(to)) {
             return true;
         }
         return false;
+    }
+
+    public List<String> getTrustedPlayers() {
+        return trustedPlayers;
     }
 
     public String getOwnerUUID() {
