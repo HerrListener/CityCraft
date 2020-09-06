@@ -17,15 +17,6 @@ public class PlotChunkGenerator extends ChunkGenerator {
 
     CityCraftAPI cityCraftAPI = CityCraftAPI.get();
 
-    @Override
-    public byte[] generate(World world, Random random, int x, int z) {
-        return super.generate(world, random, x, z);
-    }
-
-    @Override
-    public byte[][] generateBlockSections(World world, Random random, int x, int z, BiomeGrid biomes) {
-        return super.generateBlockSections(world, random, x, z, biomes);
-    }
 
     @Override
     public ChunkData generateChunkData(World world, Random random, int chunkX, int chunkZ, BiomeGrid biome) {
@@ -82,23 +73,23 @@ public class PlotChunkGenerator extends ChunkGenerator {
                 if(relX < plotSizeX && relZ < plotSizeZ) {
                     chunkData.setBlock(x, 15, z, Material.GRASS);
                 } else {
-                    chunkData.setBlock(x, 15, z, Material.WOOD);
+                    chunkData.setBlock(x, 15, z, Material.OAK_WOOD);
                 }
 
                 if(relX == 0 && relZ < plotSizeZ) {
-                    chunkData.setBlock(x, 16, z, Material.STONE_SLAB2);
+                    chunkData.setBlock(x, 16, z, Material.QUARTZ_SLAB);
                 }
 
                 if(relX == plotSizeX && relZ < plotSizeZ) {
-                    chunkData.setBlock(x, 16, z, Material.STONE_SLAB2);
+                    chunkData.setBlock(x, 16, z, Material.QUARTZ_SLAB);
                 }
 
                 if(relX < plotSizeX && relZ == 0) {
-                    chunkData.setBlock(x, 16, z, Material.STONE_SLAB2);
+                    chunkData.setBlock(x, 16, z, Material.QUARTZ_SLAB);
                 }
 
                 if(relX <= plotSizeX && relZ == plotSizeZ) {
-                    chunkData.setBlock(x, 16, z, Material.STONE_SLAB2);
+                    chunkData.setBlock(x, 16, z, Material.QUARTZ_SLAB);
                 }
 
 
