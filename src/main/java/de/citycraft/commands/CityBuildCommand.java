@@ -9,6 +9,8 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.TimerTask;
+
 public class CityBuildCommand extends AbstractCommand {
 
     public CityBuildCommand() {
@@ -62,6 +64,7 @@ public class CityBuildCommand extends AbstractCommand {
                         player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dieser Spieler wurde bereits hinzugefügt");
                         return true;
                     }
+                    plot.getTrustedPlayers().add(target.getUniqueId().toString());
                     player.sendMessage(MESSAGES.PREFIX.getText()+"§aDer Spieler wurde erfolgreich hinzugefügt.");
                 } else {
                     if(player.hasPermission("citybuild.admin")) {
@@ -94,6 +97,7 @@ public class CityBuildCommand extends AbstractCommand {
                         player.sendMessage(MESSAGES.PREFIX.getText()+"§4Dieser Spieler wurde nicht hinzugefügt");
                         return true;
                     }
+                    plot.getTrustedPlayers().remove(target.getUniqueId().toString());
                     player.sendMessage(MESSAGES.PREFIX.getText()+"§aDer Spieler wurde erfolgreich entfernt.");
                 } else {
                     if(player.hasPermission("citybuild.admin")) {
@@ -139,7 +143,7 @@ public class CityBuildCommand extends AbstractCommand {
                 }
 
                 if(!plot.isOwner(player.getUniqueId().toString())) {
-                    if(player.hasPermission("citycraft.plots.clear")) {
+                    if(player.hasPermission("de.citycraft.plots.clear")) {
                         long timeMS = plot.clearPlot();
                         player.sendMessage(MESSAGES.PREFIX.getText()+"§7Das leeren des Grundstückes hat §e"+timeMS+"ms §7benötigt");
                     } else {
@@ -152,7 +156,7 @@ public class CityBuildCommand extends AbstractCommand {
                 }
 
             } else if(args[0].equalsIgnoreCase("save")) {
-                if(player.hasPermission("citycraft.save")) {
+                if(player.hasPermission("de.citycraft.save")) {
                     CityCraftAPI cityCraftAPI = CityCraftAPI.get();
                     cityCraftAPI.getConfiguration().save(cityCraftAPI.getPlotManager());
                     player.sendMessage("§a§oWurde gespeichert.");

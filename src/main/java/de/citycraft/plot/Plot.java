@@ -5,7 +5,6 @@ import de.citycraft.api.CityCraftAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 
 import java.util.List;
 
@@ -14,6 +13,7 @@ public class Plot {
     private String ownerUUID, world;
     private int maxX, minX, maxZ, minZ, id;
     private List<String> trustedPlayers;
+
 
 
     public Plot(String world, int maxX, int minX, int maxZ, int minZ) {
@@ -37,6 +37,7 @@ public class Plot {
         }
         return false;
     }
+
 
     public boolean isTrusted(String uuid) {
         return this.trustedPlayers.contains(uuid);
@@ -92,7 +93,7 @@ public class Plot {
                     if(y < 15) {
                         Bukkit.getWorld(this.world).getBlockAt(x,y,z).setType(Material.DIRT);
                     } else if(y == 15) {
-                        Bukkit.getWorld(this.world).getBlockAt(x,y,z).setType(Material.GRASS_BLOCK);
+                        Bukkit.getWorld(this.world).getBlockAt(x,y,z).setType(Material.GRASS);
                     } else {
                         Bukkit.getWorld(this.world).getBlockAt(x,y,z).setType(Material.AIR);
                     }

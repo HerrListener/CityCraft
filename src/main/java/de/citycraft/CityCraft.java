@@ -1,11 +1,10 @@
 package de.citycraft;
 
 import de.citycraft.api.CityCraftAPI;
+import de.citycraft.api.ExecutorUtils;
 import de.citycraft.commands.CityBuildCommand;
-import de.citycraft.generation.PlotChunkGenerator;
 import de.citycraft.listener.BuildListener;
 import de.citycraft.listener.MoveListener;
-import org.bukkit.Bukkit;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -33,8 +32,4 @@ public class CityCraft extends JavaPlugin {
 
     }
 
-    @Override
-    public ChunkGenerator getDefaultWorldGenerator(String worldName, String id) {
-        return new PlotChunkGenerator();
-    }
 }

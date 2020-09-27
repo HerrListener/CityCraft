@@ -3,8 +3,6 @@ package de.citycraft.api;
 import de.citycraft.api.plot.PlotManager;
 import de.citycraft.plot.PlotConfiguration;
 
-import java.util.List;
-
 public class CityCraftAPI {
 
     private static CityCraftAPI api;

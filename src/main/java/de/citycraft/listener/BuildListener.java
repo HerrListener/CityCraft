@@ -24,13 +24,13 @@ public class BuildListener implements Listener {
 
         if(plot != null) {
             if(!plot.isOwner(player.getUniqueId().toString())) {
-                if(!player.hasPermission("citycraft.interact.plots") && !plot.isTrusted(player.getUniqueId().toString())) {
+                if(!player.hasPermission("de.citycraft.interact.plots") && !plot.isTrusted(player.getUniqueId().toString())) {
                     event.setCancelled(true);
                     player.sendMessage(MESSAGES.NOPERM.noPermission("citybuild.interact.plots"));
                 }
             }
         } else {
-            if(!player.hasPermission("citycraft.interact.roads")) {
+            if(!player.hasPermission("de.citycraft.interact.roads")) {
                 event.setCancelled(true);
                 player.sendMessage(MESSAGES.NOPERM.noPermission("citybuild.interact.roads"));
             }
@@ -46,9 +46,9 @@ public class BuildListener implements Listener {
 
     @EventHandler
     public void onPhysics(BlockPhysicsEvent event) {
-        if(!cityCraftAPI.getPlotManager().getPlotWorlds().contains(event.getBlock().getWorld().getName())) return;
-        Plot plot = CityCraftAPI.get().getPlotManager().getPlotByLocation(event.getBlock().getLocation());
-        if(plot != null) event.setCancelled(true);
+        if(cityCraftAPI.getPlotManager().getPlotWorlds().contains(event.getBlock().getWorld().getName())) {
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler
@@ -62,13 +62,13 @@ public class BuildListener implements Listener {
 
         if(plot != null) {
             if(!plot.isOwner(player.getUniqueId().toString())) {
-                if(!player.hasPermission("citycraft.interact.plots") && !plot.isTrusted(player.getUniqueId().toString())) {
+                if(!player.hasPermission("de.citycraft.interact.plots") && !plot.isTrusted(player.getUniqueId().toString())) {
                     event.setCancelled(true);
                     player.sendMessage(MESSAGES.NOPERM.noPermission("citybuild.interact.plots"));
                 }
             }
         } else {
-            if(!player.hasPermission("citycraft.interact.roads")) {
+            if(!player.hasPermission("de.citycraft.interact.roads")) {
                 event.setCancelled(true);
                 player.sendMessage(MESSAGES.NOPERM.noPermission("citybuild.interact.roads"));
             }

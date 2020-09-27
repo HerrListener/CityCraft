@@ -2,11 +2,9 @@ package de.citycraft.generation;
 
 import de.citycraft.api.CityCraftAPI;
 import de.citycraft.plot.Plot;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.block.Biome;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 
@@ -41,7 +39,7 @@ public class PlotChunkGenerator extends ChunkGenerator {
             for(int x = 0; x < 16; x++) {
                 for(int z = 0; z < 16; z++) {
                     if(y == 15) {
-                        chunkData.setBlock(x,y,z,Material.GRASS_BLOCK);
+                        chunkData.setBlock(x,y,z,Material.GRASS);
                     } else {
                         chunkData.setBlock(x,y,z, Material.DIRT);
                     }
@@ -71,25 +69,25 @@ public class PlotChunkGenerator extends ChunkGenerator {
                 long relZ = (realZ + z) % diffZ;
 
                 if(relX < plotSizeX && relZ < plotSizeZ) {
-                    chunkData.setBlock(x, 15, z, Material.GRASS_BLOCK);
+                    chunkData.setBlock(x, 15, z, Material.GRASS);
                 } else {
-                    chunkData.setBlock(x, 15, z, Material.OAK_WOOD);
+                    chunkData.setBlock(x, 15, z, Material.WOOD);
                 }
 
                 if(relX == 0 && relZ < plotSizeZ) {
-                    chunkData.setBlock(x, 16, z, Material.QUARTZ_SLAB);
+                    chunkData.setBlock(x, 16, z, Material.STONE_SLAB2);
                 }
 
                 if(relX == plotSizeX && relZ < plotSizeZ) {
-                    chunkData.setBlock(x, 16, z, Material.QUARTZ_SLAB);
+                    chunkData.setBlock(x, 16, z, Material.STONE_SLAB2);
                 }
 
                 if(relX < plotSizeX && relZ == 0) {
-                    chunkData.setBlock(x, 16, z, Material.QUARTZ_SLAB);
+                    chunkData.setBlock(x, 16, z, Material.STONE_SLAB2);
                 }
 
                 if(relX <= plotSizeX && relZ == plotSizeZ) {
-                    chunkData.setBlock(x, 16, z, Material.QUARTZ_SLAB);
+                    chunkData.setBlock(x, 16, z, Material.STONE_SLAB2);
                 }
 
 

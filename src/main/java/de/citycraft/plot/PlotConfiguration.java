@@ -2,7 +2,6 @@ package de.citycraft.plot;
 
 import com.google.gson.Gson;
 import de.citycraft.api.plot.PlotManager;
-import de.citycraft.generation.PlotChunkGenerator;
 
 import java.io.*;
 
